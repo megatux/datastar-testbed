@@ -3,7 +3,10 @@ class ClickToEditController < ApplicationController
 
   def edit
     datastar = Datastar.new(request:, response:, view_context:)
-    datastar.merge_fragments(Edit.new, selector: "contact_#{params[:id]}")
+
+    # byebug
+    # datastar.merge_fragments(Edit.new, selector: "#contact_1")  # do not work
+    datastar.merge_fragments("<h1>hi!</h1>", selector: "#contact_1")  # works fine
   end
 
   def update
