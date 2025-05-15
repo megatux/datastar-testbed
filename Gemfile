@@ -38,6 +38,7 @@ group :development, :test do
   gem "ruby-lsp"
   gem "amazing_print"
   gem "standardrb"
+  gem "byebug"
 end
 
 group :development do
