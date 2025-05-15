@@ -36,6 +36,8 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "ruby-lsp"
+  gem "amazing_print"
+  gem "standardrb"
 end
 
 group :development do
@@ -48,3 +50,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Awesome views
+gem "phlex-rails"
+gem "phlexible"
+gem "literal"
+gem "datastar"
