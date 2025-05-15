@@ -14,6 +14,7 @@ class Views::Base < Components::Base
         meta name: "viewport", content: "width=device-width, initial-scale=1"
         meta name: "google", content: "notranslate"
 
+        link rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
         stylesheet_link_tag :app
 
         script type: "module",
