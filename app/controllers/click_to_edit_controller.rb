@@ -1,13 +1,14 @@
 class ClickToEditController < ApplicationController
   def index
-    render Index.new
+    render Index.new(notice: flash[:notice])
   end
 
   def show
+    show_component = Show.new(params[:id])
     if datastar.sse?
-      datastar.merge_fragments(Show.new(params[:id]))
+      datastar.merge_fragments(show_component)
     else
-      render ViewWithComponent.new(Show.new(params[:id]))
+      render ViewWithComponent.new(show_component)
     end
   end
 
@@ -16,7 +17,8 @@ class ClickToEditController < ApplicationController
   end
 
   def update
-    redirect_to click_to_edit_index_path, status: 303  # 303 change verb to GET
+    flash[:notice] = "Success!"
+    datastar.redirect click_to_edit_index_path
   end
 
   private
@@ -32,7 +34,12 @@ class ClickToEditController < ApplicationController
   end
 
   class Index < Views::Base
+    def initialize(notice: nil)
+      @notice = notice
+    end
+
     def view_template
+      div(style: { color: "green" }) { "Notice: #{@notice}" } if @notice.present?
       render Show.new(1)
     end
   end
@@ -58,7 +65,7 @@ class ClickToEditController < ApplicationController
           input type: "text", "data-bind" => "email"
         }
         div {
-          button("data-on-click" => "@put('#{click_to_edit_path(@id)}',"\
+          button("data-on-click" => "@put('#{click_to_edit_path(@id)}'," \
             "{ headers: { 'X-Csrf-Token': '#{helpers.form_authenticity_token}' }})") {
             plain "Save"
           }
