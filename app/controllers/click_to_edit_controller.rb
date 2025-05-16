@@ -16,7 +16,7 @@ class ClickToEditController < ApplicationController
   end
 
   def update
-    redirect_to click_to_edit_index_path
+    redirect_to click_to_edit_index_path, status: 303  # 303 change verb to GET
   end
 
   private
